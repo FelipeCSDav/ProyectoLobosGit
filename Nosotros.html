@@ -9,36 +9,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="menu">
-        <img src="img/Logo.png" alt="">
-
-        <a class="boton1" href="index.html" >Inicio</a>
-        <a class="boton2" href="Blog.html" >Blog</a>
-        <a class="boton3" href="Nosotros.html" >Sobre Nosotros</a>
-        <a class="boton4" href="carrito.html">Carrito</a>
-        
-        <nav class="navbar navbar-expand-sm navbar-dark bg-black">
-          <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="mynavbar">
-              <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="inicioses.html">Iniciar sesión</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0)">Contactanos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0)">Reseñas</a>
-                </li>
-              </ul>
-              <form class="d-flex">
-                <input class="form-control me-2" type="text" placeholder="Escribir...">
-                <button class="btn btn-light" type="button">Buscar</button>
-              </form>
-            </div>
-          </div>
-        </nav>
+  <header class="header">
+    <div class="logo">
+        <img src="img/Logo.png" alt="Logo">
     </div>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="/Inicio-Sesion.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="imagen-carrito">
+      <a href="#" class="btn"><button>Carrito</button></a>
+      
+    </div>
+</header>
+
+<img id="imgpalet" src="img/paletaVikinga.jfif" alt="img">
     <p id="p1">Estrenamos Web!</p>
     <div class="fotonosotros">
       <img id="img1" src="img/sobrenosotros.jpg" alt="fotogrupo">
@@ -54,12 +45,17 @@
       </div>
     </div>
 
-    <div class="pie-pagina">
-        
-      <p class="texto-pie-pagina">© 2024, vikingos </p>
-      <p class="texto-pie-pagina">Como afiliado de Amazon yo ingreso por compras adscritas</p>
-
+    <footer class="footer">
       
-    </div>
+      <img src="img/Instagram_icon.png.webp"class="imagen-footer2" alt="">
+      <img src="img/Facebook_Logo_(2019).png.webp" class="imagen-footer2" alt="">
+      
+      <div class="div-txt-footer">
+        <p class="txt-footer">© 2024, vikingos </p>
+        <p class="txt-footer">Como afiliado de Amazon yo ingreso por compras adscritas</p>
+      </div>
+    
+        <img src="img/metodos-pago.png" class="imagen-footer" alt="pago">
+    </footer>
 </body>
 </html>

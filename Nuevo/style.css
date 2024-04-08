@@ -80,6 +80,38 @@ body{
     text-transform: uppercase;
 }
 
+.container-foto{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 150px;
+
+    
+}
+
+.container-foto button{
+    border-radius: 20px;
+    padding: 0 15px;
+    border: solid;
+    
+}
+.container-foto button:hover{
+    color: #ce790b;
+    transform: scale(1.1);
+}
+
+.item{
+    padding: 0 50px;
+}
+
+
+.item img{
+    width: 300px;
+    border-radius: 30px;
+}
+
 .footer{
     bottom: 0;
     background-color: #000;
@@ -94,13 +126,19 @@ body{
 .div-txt-footer{
     text-align: center;
     color: white;
+    
     padding: 0 200px;  
 }
 .txt-footer{
+    padding-left: 200px;
     margin-bottom:  0;
 }
 
 .imagen-footer{
-    max-width: auto;
     max-height: 80px;
+}
+
+.imagen-footer2{
+    max-height: 50px;
+    padding-left: 60px;
 }

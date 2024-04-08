@@ -73,8 +73,130 @@ body{
 
 
 
+.titulo-h2{
+    margin-top: 70px;
+    h2{
+        font-size: 30px;
+        text-align: center;
+    }
+
+    hr{
+        width: 1000px;
+        margin: 25px auto;
+        border: solid 1px black;
+    }
+    
+}
+.seccion-1{
+    display:flex;
+    justify-content: center;
+}
+.item-1{
+    margin: 0 20px;
+}
 
 
+.Producto img{
+    max-width: 250px;
+}
+
+.item-2{
+    margin-left: 200px;
+}
+.Subtotal-1{
+    font-weight: bold;
+    display: flex;
+    p{
+        margin-left: 150px;
+    }
+}
+#parrafo-1{
+    margin-left: 0;
+    
+}
+
+.Subtotal-2 input{
+    padding: 10px 0;
+   width: 310px;
+   font-size: 15px;
+   text-align: center;
+   
+}
+
+.Subtotal-3 button{
+    font-size: 18px;
+    color: white;
+    background-color: #000;
+    margin-top: 25px;
+    padding: 0 100px;
+    height: 50px;
+    border: solid 2px black;
+    border-radius: 100px;
+}
+.Subtotal-4 img{
+    width: 300px;
+}
+
+#Art-des{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 80px;
+    text-decoration: overline;
+    text-transform: uppercase;
+}
+
+
+.container-foto{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 150px;
+
+    
+}
+
+.container-foto button{
+    border-radius: 20px;
+    padding: 0 15px;
+    border: solid;
+    
+}
+.container-foto button:hover{
+    color: #ce790b;
+    transform: scale(1.1);
+}
+
+.item{
+    padding: 0 50px;
+}
+
+
+.item img{
+    width: 300px;
+    border-radius: 30px;
+}
+
+
+
+.info{
+    display: flex;
+    text-align: center;
+    
+
+    img{
+        width: 100px;
+    }
+    .info-1{
+        padding: 0 120px;
+    }
+
+    .info-txt-1{
+        font-weight: bold ;
+        text-decoration: underline;
+    }
+}
 
 
 

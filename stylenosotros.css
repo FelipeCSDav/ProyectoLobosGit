@@ -70,45 +70,7 @@ body{
     color: #ce790b;
     transform: scale(1.1);
 }
-.boton1{
-    text-decoration: none;
-    background-color: white;
-    padding: 8px 40px;
-    border-radius: 50px;
-    margin-left: 450px;
-    color: #000;
-    font-weight: 600;
-}
 
-.boton2{
-    text-decoration: none;
-    background-color: white;
-    padding: 8px 50px;
-    border-radius: 50px;
-    margin-left: 40px;
-    color: #000;
-    font-weight: 600;
-}
-
-.boton3{
-    text-decoration: none;
-    background-color: white;
-    padding: 8px 15px;
-    border-radius: 50px;
-    margin-left: 40px;
-    color: #000;
-    font-weight: 600;
-}
-
-.boton4{
-    text-decoration: none;
-    background-color: white;
-    padding: 8px 40px;
-    border-radius: 50px;
-    margin-left: 40px;
-    color: #000;
-    font-weight: 600;
-}
 
 #p1{
     font-family: monospace;

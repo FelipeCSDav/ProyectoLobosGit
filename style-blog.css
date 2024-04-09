@@ -72,3 +72,127 @@ body{
     color: #ce790b;
     transform: scale(1.1);
 }
+
+.Premio{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px; 
+}
+
+
+.seccion-1{
+    display:flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+.item-1{   
+    margin: 0 25px 0 50px;
+}
+.item-1-txt{
+    border: solid thin rgb(0, 0, 0);
+    width: 700px;
+    padding: 10px;
+}
+
+.titulo-h2{
+    margin-top: 70px;
+    
+    h2{
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    hr{
+        width: 1000px;
+        margin: 25px auto;
+        border: solid 1px black;
+    }
+    img{
+        height: 100px;
+    }
+}
+
+.btn-skoll{
+    padding: 5px 50px;
+    border: solid 2px black;
+    border-radius: 10px;  
+}
+.btn-skoll:hover{
+    color: #ce790b;
+    font-weight: bold;
+    border: solid 3px #ce790b;
+    transform: scale(1.1);
+}
+
+.Producto img{
+    width: 250px;
+}
+
+.item-2{
+    margin-left: 200px;
+}
+.Subtotal-1{
+    text-align: center;
+    font-weight: bold;
+}
+#parrafo-1{
+    margin-left: 0;
+}
+
+.Subtotal-2 input{
+
+   padding: 10px 0;
+   width: 310px;
+   font-size: 15px;
+   text-align: center;
+   
+}
+
+.Subtotal-3 button{
+    font-size: 18px;
+    color: white;
+    background-color: #000;
+    margin-top: 25px;
+    padding: 0 100px;
+    height: 50px;
+    border: solid 2px black;
+    border-radius: 100px;
+}
+.Subtotal-4 img{
+    width: 300px;
+}
+
+
+.footer{
+    bottom: 0;
+    background-color: #000;
+    width: 100%;
+    height: 120px;
+    position: relative; 
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.div-txt-footer{
+    text-align: center;
+    color: white;
+    
+    padding: 0 260px;  
+}
+.txt-footer{
+    padding-left: 200px;
+    margin-bottom:  0;
+}
+
+.imagen-footer{
+    max-height: 80px;
+}
+
+.imagen-footer2{
+    max-height: 50px;
+    padding-left: 60px;
+}

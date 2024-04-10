@@ -182,7 +182,10 @@ body{
 }
 
 .imagen-footer{
-    max-height: 80px;
+    height: 65px;
+    background-color: white;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 .imagen-footer2{

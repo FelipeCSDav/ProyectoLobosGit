@@ -133,35 +133,12 @@ body{
 .item-2{
     margin-left: 200px;
 }
-.Subtotal-1{
+.txt-click{
     text-align: center;
     font-weight: bold;
 }
 #parrafo-1{
     margin-left: 0;
-}
-
-.Subtotal-2 input{
-
-   padding: 10px 0;
-   width: 310px;
-   font-size: 15px;
-   text-align: center;
-   
-}
-
-.Subtotal-3 button{
-    font-size: 18px;
-    color: white;
-    background-color: #000;
-    margin-top: 25px;
-    padding: 0 100px;
-    height: 50px;
-    border: solid 2px black;
-    border-radius: 100px;
-}
-.Subtotal-4 img{
-    width: 300px;
 }
 
 

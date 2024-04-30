@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     font-family: "Nunito", sans-serif;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 body{
@@ -18,8 +18,8 @@ body{
     align-items: center;
     justify-content: space-between;
     height: 110px;
-    padding: 5px 10%;
-
+    padding: 0 5%; 
+    
 }
 
 .header .logo:hover{
@@ -27,8 +27,7 @@ body{
 }
 
 .header .logo img{
-    width: auto;
-    height: 110px;
+    width: 300px;
 }
 
 .nav-links{

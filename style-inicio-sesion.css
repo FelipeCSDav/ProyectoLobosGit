@@ -151,3 +151,12 @@ body{
 .form input[type="submit"]:hover{
     background-color: #8f3c04;
 }
+
+
+.warnings{
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    padding-top: 20px;
+    
+}

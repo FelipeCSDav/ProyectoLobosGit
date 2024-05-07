@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: monospace;
+    background: #ef4b4c;
+}
+
+.contenedor{
+    display: flex;
+    width: 300px;
+    height: 320px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 14px;
+    background: #ef4b4c;
+    box-shadow:  16px 16px 31px #ce4141,
+             -16px -16px 31px #ff5657;
+}
+
+.Contar{
+    font-size: 5rem;
+}
+
+.Botones{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    margin: 5px;
+    width: 70px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: white;
+    border: none;
+    border-radius: 5px;
+}
+
+span{
+    color: #ef4b4c;
+}
+
+.Reseteo{
+    width: 50px;
+    height: 25px;
+}

@@ -88,9 +88,6 @@ body{
     font-size: 2rem;
 }
 
-.form-information-childs p{
-    color: #555;
-}
 
 .icons{
     margin: 15px 0;
@@ -154,9 +151,10 @@ body{
 
 
 .warnings{
-    width: 200px;
+    width: 220px;
     text-align: center;
     margin: auto;
-    padding-top: 20px;
-    
+    color: #b0561b;
+    padding-top: 20px;  
+    font-weight: bold;
 }

@@ -6,9 +6,7 @@
     <title>Sign up</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style-inicio-sesion.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!---Jquery-->
-    <script src="validar.js"></script>
-     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!---Jquery-->   
 </head>
 
 <body>
@@ -30,18 +28,18 @@
                 </div>
                 <p>o usa tu gmail para registrarte</p>
                 
-                <form class="form" id="form" method="post">
-                    <label>
+                <form class="form" id="form">
+                    <label id="l1">
                         <i class='bx bx-user' ></i>
                         <input type="text" id="usuario" placeholder="Nombre de Usuario">
                         
                     </label>
-                    <label>
+                    <label id="l2">
                         <i class='bx bx-envelope' ></i>
                         <input type="email" id="email" placeholder="Correo Electronico">
                         
-                    </label>
-                    <label>
+                    </label>                  
+                    <label id="l3">
                         <i class='bx bx-lock-open' ></i>
                         <input type="password" id="password" placeholder="Contraseña">
                         
@@ -52,5 +50,6 @@
             </div>
         </div>
     </div>
+    <script src="validar.js"></script>
 </body>
 </html>

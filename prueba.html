@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Collares</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            const contador = $("#Contar");
+            const sumar = $("#Incremento");
+            const restar = $("#Decremento");
+
+            let numero = 0;
+
+            sumar.click(function() {
+                numero++;
+                contador.text(numero);
+            });
+
+            restar.click(function() {
+                if(numero > 0) {
+                    numero--;
+                    contador.text(numero);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div item-1>
+        <p>COLLAR ÁRBOL MUNDO</p>
+        <p>Modelo: Bronce</p>
+        <p>Total: $8.000</p> 
+        <div class="contenedor">
+            <p>Cantidad:</p>
+            <p class="Contar" id="Contar">0</p>
+            <div class="Botones">
+                <button class="Incremento" id="Incremento"><span class="material-symbols-rounded">add</span></button>
+                <button class="Decremento" id="Decremento"><span class="material-symbols-rounded">remove</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

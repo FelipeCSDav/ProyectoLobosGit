@@ -1,0 +1,196 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url(../img/odin.jpg);
+    background-size: cover;
+}
+
+.container-form{
+    display: flex;
+    border-radius: 20px;
+    box-shadow:  0 0 30px -5px rgb(247, 228, 200);  /*posicion x, posicion y, desenfoque, expansion, color*/
+    height: 500px;
+    max-width: 900px;
+    transition: all is ease;
+    margin: 10px;
+}
+
+/*login de iniciar sesion*/
+.containerSesion{
+    flex-direction: row-reverse; /*Invertir para login2*/
+    box-shadow:  0 0 30px -5px rgb(247, 228, 200);  /*posicion x, posicion y, desenfoque, expansion, color*/
+   
+    .form-information {
+        border-radius: 20px 0 0 20px;
+        background-color: #bdbdbdea;
+    }
+    
+    .information{
+        border-radius: 0 20px 20px 0;
+    }
+
+}
+
+.information {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #000000f5;
+    border-radius: 20px 0 0 20px;
+}
+
+.info-childs {
+    width: 100%;
+    padding: 0 30px;
+}
+
+/* Logo Container */
+.logo-container {
+    position: relative;
+}
+
+/* Logo Normal */
+.logo-normal {
+    transition: opacity 0.3s ease;
+}
+
+/* Logo Hover */
+.logo-hover {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo-container:hover .logo-normal {
+    opacity: 0;
+}
+
+.logo-container:hover .logo-hover {
+    opacity: 1;
+}
+
+.info-childs h2 {
+    font-size: 2.5rem;
+    color: #b0561b;
+}
+
+.info-childs p {
+    margin: 15px 0;
+    color: #dcd9d9;
+}
+
+.info-childs input {
+    margin: 0 0 0;
+    background-color: transparent;
+    outline: none;
+    border: solid 2px #b0561b;
+    border-radius: 28px;
+    padding: 10px 20px;
+    color: #b0561b;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.info-childs input:hover {
+    background-color: #b0561b;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-information {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+    background-color: #f8f8f8d5;
+    border-radius: 0 20px  20px 0;
+}
+
+.form-information-childs {
+    padding: 0px 30px;
+}
+
+.form-information-childs h2 {
+    color: #333;
+    font-size: 2rem;
+}
+
+
+.icons {
+    margin: 15px 0;
+}
+
+.icons i {
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    margin: 0 10px;
+    color: #b0561b;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    border: solid thin #b0561b;
+}
+
+.icons i:hover {
+    background-color: #b0561b;
+    color: #fff
+}
+
+.form {
+    margin: 20px 0 0 0;
+}
+
+.form label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 2px 0;
+    border-radius: 20px;
+    padding: 0 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.form label input {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #333;
+}
+
+
+.form input[type="submit"] {
+    background-color: #b0561b;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.form input[type="submit"]:hover {
+    background-color: #8f3c04;
+}
+
+
+.form p{
+    font-size: 14px; 
+    color: red;
+    height: 10px;
+}

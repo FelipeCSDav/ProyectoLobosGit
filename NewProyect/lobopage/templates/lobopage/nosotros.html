@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros</title>
+  
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    sintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <!--Iconos Bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!--CSS-->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <!--Barra de navegacion-->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">
+          <img class="logo-normal" src="{% static 'img/Logo-sinfondo.png' %}"   alt="Logo" width="90" height="90">
+          <img class="logo-hover"  src="{% static 'img/Logo-sinfondo2.png' %}"  alt="Logo" width="88" height="88">
+          Lobos de Guerra
+        </a>
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <!--Botones del Nav-->
+          <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'mitologia' %}">Mitología</a>
+            <a class="nav-link" href="{% url 'nosotros' %}">Nosotros</a>
+            <a class="nav-link"   href="{% url 'compra' %}">Carrito<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-right" viewBox="0 0 10 4"> <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
+            <i class="bi bi-cart3"></i></a>
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'logout' %}">Cerra Sesión</a>
+            {% else %}
+            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div class="container contenido-nost" style="margin-top: 200px;">
+    <div class="row">
+      <div class="col text-end col-lg-5 col-12 mt-3">
+        <img class="rounded-3" src="{% static 'img/sobrenosotros.jpg' %}" alt="" style="width: 100%;">
+      </div>
+      <div class="col col-lg-7 col-12 mt-3">
+        <h1>Bienvenidos</h1>
+        <h1>Viajeros a Lobos de Guerra Chile</h1>
+        <p>Como ya saben, hemos estado durante mucho tiempo activos en las redes sociales. Tanto en instagram como en facebook hemos estado publicando post sobre mitología,simbología,runas y otras cosas de interés sobre la cultura nórdica.</p>
+        <p>Ahora tras mucho tiempo trabajando en ella, les presentamos nuestra Web,la cual hemos hecho con muchisimo cariño. En ella encontrarán la mayoría de publicaciones que que hemos estado haciendo en nuestras redes sociales, ofrecemos una variedad de productos vikingos y nórdicos, y que a poco iremos añadiendo cosas nuevas.</p>
+        <p>Deseamos con mucha ilusión que nuestra Web les agrade, la disfruten y la compartan ¡gracias a todos por estar ahí!</p>    
+        <p>Que los dioses los sonrían y los protejan a todos, ¡Skål!</p>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <div class="container-fluid text-white p-3" style="background-color: black; margin-top: 70px;">
+
+    <div class="mt-3">
+      <h3 class="text-center fw-bold">Únete a nosotros y síguenos en nuestras redes</h3>
+      <hr>
+    </div>
+
+    <div class="row justify-content-around text-center text-md-start">
+      <div class="col-md-2 text-center">
+        <h1 class="mb-0" style="font-family: 'Vikingo';">Vikingos</h1>
+        <img src="{% static 'img/Logo-sinfondo.png' %}" alt="img-logo" style=" width: 100px;">
+      </div>
+      <div class="col-md-2">
+        <ul class="list-unstyled">
+          <li class="fw-bold my-2">Partnership</li>
+          <li><a href="#" class="text-decoration-none text-white">Website</a></li>
+          <li><a href="#" class="text-decoration-none text-white">Social Media</a></li>
+          <li><a href="#" class="text-decoration-none text-white">Branding</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="list-unstyled">
+          <li class="fw-bold my-2">About</li>
+          <li><a href="" class="text-decoration-none  text-white">Our Project</a></li>
+          <li><a href="" class="text-decoration-none  text-white">Careers</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="list-unstyled">
+          <li class="fw-bold my-2">Support</li>
+          <li><a href="#" class="text-decoration-none text-white">Contact</a></li>
+          <li><a href="#" class="text-decoration-none text-white">Supprt Request</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2" >
+        <li class="fw-bold my-2 list-unstyled">Follow us</li>
+        <ul class="list-unstyled d-flex justify-content-center justify-content-md-start">
+          <li><a href="https://www.facebook.com/profile.php?id=100092718123317" target="_blank" ><i class="social bi bi-facebook me-2"></i></a></li>
+          <li><a href="#"                                                                       ><i class="social bi bi-whatsapp mx-2"></i></a></li>
+          <li><a href="https://www.instagram.com/lobosdeguerrachile/"           target="_blank" ><i class="social bi bi-instagram mx-2"></i></a></li>  
+        </ul>
+      </div>
+    </div> <!--Fin Row Footer-->
+    <hr>
+    <div class="row">
+      <div class="col-md-12 text-center pt-2">
+        <p>&copy; 2024 Copyright <a href="#" class="text-white">The Providers</a></p>
+      </div>
+    </div>
+
+  </div> <!--Fin Footer-->
+</body>
+</html>

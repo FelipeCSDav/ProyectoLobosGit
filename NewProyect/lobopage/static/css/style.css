@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+@font-face {
+    font-family: 'Vikingo';
+    src: url(../fuentes/PR\ Viking.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
+}
+
+/*Header*/
+.navbar>.container-fluid {
+    justify-content: center; /*Esto permite que se centre el nav ya que el de bootstrap lo tiene en spacebetween*/  
+}
+
+.navbar {
+    --bs-navbar-padding-y: 0.5rem; /*Cambia el padding del nav para que aumente la altura y no cambiarlo con height*/
+    background-color: rgb(0, 0, 0);
+    .navbar-collapse {
+        flex-grow: unset;   /*Le quito la propiedad por defecto de bootstrap*/
+    } 
+}
+
+/*Botones-navbar*/
+.nav-link{
+    --bs-navbar-nav-link-padding-x: 2rem;
+    color: #ffffff;
+    margin: 0 10px;   
+    border: solid thin rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 3px 0;
+    /*El justify-content funciona si esta el flex
+    esto esta solo para cuando usas las 3 rayitas en tamaño celular*/
+    display: flex;
+    justify-content: center;
+
+    &:hover{
+        color: #ce790b;
+        border-color: #ce790b;
+        transform: scale(1.1);
+    }
+
+    &:focus{
+        color: #ce790b;
+        border-color: #ce790b;
+    }
+} 
+
+/*Logo*/
+.navbar-brand{ 
+    color: #fff;
+    font-family: 'Vikingo';
+    font-size: 30px;
+    position: relative; /*Esto es para el logo-hover*/
+    
+    &:hover {
+        color: #ce790b;
+    }
+    &:focus {
+        color: #ce790b;
+    }      
+    
+}
+
+/*Logo Hover*/
+.navbar-brand .logo-hover {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+}
+
+.navbar-brand:hover .logo-hover {
+    opacity: 1;
+}
+
+.navbar-brand:hover .logo-normal {
+    opacity: 0;
+}
+
+
+/*Iconos footer, la clase social no es de Bootstrap*/
+.social{
+    color: white;
+    &:hover{
+        color: #ce790b;
+    }
+}
+
+
+/*Index Pagina principal*/
+
+#titulo-destacados{
+    font-size: 25px;
+    text-align: center;
+    margin: 150px 0 80px 0;
+    text-decoration: overline;
+    text-transform: uppercase;
+}
+
+/*Imagenes de las tarjetas*/
+.card img{
+    height: 400px;
+    object-fit: cover;
+}
+
+.btn-outline-light{
+    border: solid 2px rgb(0, 0, 0);
+    color: black;
+    padding: 2px 10px;
+    transition: 0.3s;
+    &:hover{
+        color: #ce790b;
+        border: solid 2px #ce790b;
+    }
+    /*Esto es porque cuando clickeas el bootstrap cambia el color*/
+    &:active{
+        color: #ce790b !important;
+        border: solid 2px #ce790b !important;
+    }
+}
+
+/*Modals Index*/
+.modal{
+    --bs-modal-width: 900px; /*Aumento tamaño del modal*/
+}
+
+.modal-header{
+    border-bottom: none; 
+    padding: 20px 20px 0 20px;
+}
+
+.btn-close{
+    &:focus{
+        box-shadow: none;
+    }      
+}
+#btn-comprar-index{
+    width: 90%;
+    color: black;
+    padding: 10px 0;
+    border-radius: 20px;
+    border: solid 1px black;
+    transition: 0.3s;
+    &:hover{
+        color: #ce790b;
+        background-color: #000000;
+    }
+}
+
+/*Mitologia*/
+#titulo-mit{
+    margin-top: 70px;
+
+    h2{
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    hr{
+        width: 1000px;
+        margin: 25px auto;
+        border: solid 1px black;
+    }
+
+    img{
+        height: 100px;
+    }
+}
+
+.fila-mit{
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.img-mit{
+    width: 250px; 
+    max-height: 250px; /*para que no se estire cuando sea responsive*/
+    margin: 0px 25px 0px 0px;
+}
+
+.historia-mit{
+    border: solid thin rgb(0, 0, 0);
+    width: 700px;
+    padding: 10px;
+}
+
+.codpromo-mit{
+    margin: 50px 0 50px 0 ;
+    height: 100px; /*Fijar un tamaño ayuda a que no se expanda*/
+    text-align: center; 
+}
+
+.btn-skoll{
+    font-family: 'Vikingo';
+    font-size: 22px;
+    padding: 5px 50px;
+    border: solid 2px black;
+    border-radius: 10px;
+}
+
+.btn-skoll:hover{
+    color: #ce790b;
+    font-weight: bold;
+    border: solid 3px #ce790b;
+    transform: scale(1.1);
+    transition:  0.06s;
+}
+
+
+/*Nosotros*/
+.contenido-nost{
+    margin-top: 150px;
+    margin-bottom: 200px;
+}
+
+
+/*Carrito*/
+#titulo-carrito{
+    margin-top: 60px;
+}
+
+.fila-producto{
+    width: 75%;
+    /*Botones de suamr y restar*/
+    #Incremento,#Decremento{
+    background: white;
+    border: none;
+    border-radius: 50px;
+    &:hover{
+        background-color: #0000001e;
+    }
+    }
+
+}
+
+#input-codpromo-carrito{
+    padding: 7px 5px;
+    width: 100%; /*Este width sive en css o en bootstrap w-100*/
+    font-size: 15px;
+    text-align: center;
+   
+    &:focus{
+        outline-color: #ce790b;
+    }
+}
+
+#txt-codpromo-carrito{
+    color: #ce790b;
+    font-weight: bold;
+    font-size: 16px;
+    height: 15px;
+    
+}
+
+#btn-continuar-carrito{
+    color: #fff;
+    background-color: black;
+    padding: 10px 0;
+    border-radius: 2px;
+    border: none;
+    transition: 0.3s;
+    &:hover{
+        color: #cf6400;
+        background-color: #000000ee;
+    }
+}

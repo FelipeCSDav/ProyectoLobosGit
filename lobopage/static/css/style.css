@@ -29,6 +29,7 @@
 /*Botones-navbar*/
 .nav-link{
     --bs-navbar-nav-link-padding-x: 2rem;
+    --bs-navbar-active-color: #ce790b;;
     color: #ffffff;
     margin: 0 10px;   
     border: solid thin rgb(255, 255, 255);
@@ -49,7 +50,31 @@
         color: #ce790b;
         border-color: #ce790b;
     }
+
 } 
+
+/*Esto es la flechita cuando esta logeado*/
+.dropdown-toggle {
+    &::after{
+        margin-top: 10px;
+    }
+    
+    .nav-link.show {
+        color: #ce790b;
+    }
+}
+
+.dropdown-menu{
+    background-color: white;
+    padding: 0px;
+    margin: 5px 0 0 10px !important;
+    border-radius: 0 5px 5px 5px ;
+    .dropdown-item{
+        background-color: transparent;
+        border-radius: 0 2px 2px 2px ;
+        &:active{background-color: #ce790b}
+    }
+}
 
 /*Logo*/
 .navbar-brand{ 

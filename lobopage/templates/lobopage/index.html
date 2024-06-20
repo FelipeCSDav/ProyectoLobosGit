@@ -42,13 +42,27 @@
             <a class="nav-link"   href="{% url 'compra' %}">Carrito<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-right" viewBox="0 0 10 4"> <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
             <i class="bi bi-cart3"></i></a>
             {% if user.is_authenticated %}
-              {% if user.username == "admin" %}
+              {% if user.is_staff %}
                 <a class="nav-link" href="{% url 'crudProductos' %}">Productos</a>
               {% endif %}
-            <a class="nav-link" href="{% url 'logout' %}">Cerra Sesión</a>
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ user.username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% if user.is_staff %}
+                  <li><a class="dropdown-item " href="http://127.0.0.1:8000/admin/">Panel Django</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item " href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+              </div>
             {% else %}
-            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+              <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
             {% endif %}
+              <!--<form action="{% url 'logout' %}" method="post">
+                {% csrf_token %} 
+                <button class="nav-link" type="">Cerra Sesión</button>
+              </form>-->
           </div>
         </div>
       </div>
@@ -94,10 +108,13 @@
     </div>
   </section>
 
-  <div >
-    <h1 id="titulo-destacados">PRODUCTOS Y ARTICULOS VIKINGOS</h1>
-  </div>
-  
+  <div class="container">
+    <div>
+        <h1 id="titulo-destacados">PRODUCTOS Y ARTICULOS VIKINGOS</h1>
+    </div>
+    <!-- Otro contenido de tu página -->
+</div>
+
 <!-- Card de Articulos -->
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -136,10 +153,10 @@
           <hr>
           <p class="fs-5">${{p.precio | intcomma }}</p>
           <div class="mt-2">
-            <form method="post" action="">
-              {% csrf_token %}
-              <button type="submit" id="btn-comprar-index">Añadir al carrito</button></a>
-            </form>
+          <form method="post" action="{% url 'agregar_al_carrito' p.id %}">
+            {% csrf_token %}
+            <button type="submit" id="btn-comprar-index">Añadir al carrito</button>
+          </form>
           </div>
           <p class="mt-4">{{p.descripcion}}</p>
           <hr>
@@ -154,7 +171,7 @@
 
 
   <!--Footer-->
-  <div class="container-fluid text-white p-3" style="background-color: black; margin-top: 200px;">
+  <div id="hola" class="container-fluid text-white p-3" style="background-color: black; margin-top: 200px;">
 
     <div class="mt-3">
       <h3 class="text-center fw-bold">Únete a nosotros y síguenos en nuestras redes</h3>

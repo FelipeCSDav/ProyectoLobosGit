@@ -3,97 +3,109 @@ $(document).ready(function() {
 
     $("#form").submit(function(e) {
        
-
         let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/; //Formato gmail
         
-        //labelUser y los otros labels son para cambiar el color del borde
-         
-        /*Gmail*/ 
+        /*Usuario*/
         if($("#email").val() === ""){
-            $("#warningGmail").html('El correo es requerido');
+            $("#warningGmail").html('El usuario es requerido');
             $("#labelGmail").css("border", "solid 1px red"); 
-        } else if(!regexEmail.test($("#email").val())){
-            $("#warningGmail").html('El correo no es valido');
-            $("#labelGmail").css("border", "solid 1px red"); 
+            e.preventDefault()
         } else {
             $("#labelGmail").css("border", "");
             $("#warningGmail").html('');
         }
+
 
         /*Contraseña*/ 
         if($("#password").val() == ""){
             $("#warningPass").html('La contraseña es requerida');
             $("#labelPass").css("border", "solid 1px red"); 
-        } else if($("#password").val().length < 8 || $("#password").val().length > 25) {
-            $("#warningPass").html('La contraseña debe tener entre 8 y 25 caracteres');
-            $("#labelPass").css("border", "solid 1px red"); 
+            e.preventDefault()
         } else {
             $("#labelPass").css("border", ""); 
             $("#warningPass").html('');
         }
         
-    });
-});
 
-//Validando formularios Login de crear cuenta
-$(document).ready(function() {
-
-    $("#form2").submit(function(e) {
-        e.preventDefault();
-
-        let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/; //Formato gmail
-        
-        //labelUser y los otros labels son para cambiar el color del borde
-        
-        /*Usuario*/ 
-        if ($("#usuario").val() === "") {
-            $("#warningUser").html('El nombre es requerido');
-            $("#labelUser").css("border", "solid 1px red");
-        } else if ($("#usuario").val().length < 4 || $("#usuario").val().length > 20) {
-            $("#warningUser").html('El campo debe tener entre 4 y 20 caracteres');
-            $("#labelUser").css("border", "solid 1px red");
-        } else {
-            // Resetear el borde y los warnings
-            $("#labelUser").css("border", "");
-            $("#warningUser").html('')
-        }
-
-        
-        /* Rut */ 
-        if ($("#rut").val() === "") {
-            $("#warningRut").html('El rut es requerido');
-            $("#labelRut").css("border", "solid 1px red");
-        } else if (!/^\d{7,8}-[\dkK]$/.test($("#rut").val())) {
-            $("#warningRut").html('Rut sin puntos 99.999.999-9');
-            $("#labelRut").css("border", "solid 1px red");
-        } else {
-            $("#labelRut").css("border", "");
-            $("#warningRut").html('');
-        }
-        
-    
-        /*Gmail*/ 
-        if($("#email").val() === ""){
-            $("#warningGmail").html('El correo es requierido');
+        /*En caso de Gmail*/ 
+        /*if($("#email").val() === ""){
+            $("#warningGmail").html('El correo es requerido');
             $("#labelGmail").css("border", "solid 1px red"); 
+            e.preventDefault()
         } else if(!regexEmail.test($("#email").val())){
             $("#warningGmail").html('El correo no es valido');
-            $("#labelGmail").css("border", "solid 1px red"); 
+            $("#labelGmail").css("border", "solid 1px red");
+            e.preventDefault()
         } else {
             $("#labelGmail").css("border", "");
             $("#warningGmail").html('');
+        }*/
+    });
+});
+
+//Validando formularios Registro
+$(document).ready(function() {
+
+    $("#form2").submit(function(e) {
+        let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/; // Formato de correo electrónico
+        
+        /* Usuario */ 
+        if ($("#id_username").val() === "") {
+            $("#warningUser").html('El usuario es requerido');
+            $("#labelUser").css("border", "solid 1px red");
+            e.preventDefault();
+        } else if ($("#id_username").val().length < 4 || $("#id_username").val().length > 20) {
+            $("#warningUser").html('El campo debe tener entre 4 y 20 caracteres');
+            $("#labelUser").css("border", "solid 1px red");
+            e.preventDefault();
+        } else {
+            // Resetear el borde y los warnings
+            $("#labelUser").css("border", "");
+            $("#warningUser").html('');
+        }   
+    
+        /* Correo */ 
+        if ($("#id_email").val() === "") {
+            $("#warningEmail").html('El correo es requerido');
+            $("#labelEmail").css("border", "solid 1px red"); 
+            e.preventDefault();
+        } else if (!regexEmail.test($("#id_email").val())) {
+            $("#warningEmail").html('El correo no es válido');
+            $("#labelEmail").css("border", "solid 1px red"); 
+            e.preventDefault();
+        } else {
+            $("#labelEmail").css("border", "");
+            $("#warningEmail").html('');
         }
 
-        /*Contraseña*/ 
-        if($("#password").val() == ""){
-            $("#warningPass").html('La contraseña es requierida');
-            $("#labelPass").css("border", "solid 1px red"); 
-        } else if($("#password").val().length < 8 || $("#password").val().length > 25) {
-            $("#warningPass").html('La contraseña debe tener entre 8 y 25 caracteres');
-            $("#labelPass").css("border", "solid 1px red"); 
+        /* Contraseña 1 */ 
+        if ($("#id_password1").val() === "") {
+            $("#warningPass1").html('La contraseña es requerida');
+            $("#labelPass1").css("border", "solid 1px red");
+            e.preventDefault();
+        } else if ($("#id_password1").val().length < 8 || $("#id_password1").val().length > 25) {
+            $("#warningPass1").html('La contraseña debe tener entre 8 y 25 caracteres');
+            $("#labelPass1").css("border", "solid 1px red");
+            e.preventDefault();
         } else {
-            $("#labelPass").css("border", ""); 
-            $("#warningPass").html('');
+            $("#labelPass1").css("border", ""); 
+            $("#warningPass1").html('');
+        }
+
+        /* Contraseña 2 */ 
+        if ($("#id_password2").val() === "") {
+            $("#warningPass2").html('Confirmar contraseña es requerido');
+            $("#labelPass2").css("border", "solid 1px red");
+            e.preventDefault();
+        } else if ($("#id_password1").val() !== $("#id_password2").val()) {
+            $("#warningPass2").html('Las contraseñas no coinciden');
+            $("#labelPass1").css("border", "solid 1px red");
+            $("#labelPass2").css("border", "solid 1px red");
+            e.preventDefault();
+        } else {
+            $("#labelPass1").css("border", ""); 
+            $("#labelPass2").css("border", ""); 
+            $("#warningPass2").html('');
         }
         
     });

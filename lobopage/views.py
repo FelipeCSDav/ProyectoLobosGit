@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 #Importar los modelos
-from .models import Alumno,Genero,Producto
+from .models import Producto, CarritoItem
 from django.contrib.auth.decorators import login_required #Importante para login
-
+from django.contrib.admin.views.decorators import staff_member_required
+from .forms import CustomUserCreationForm
+from django.contrib.auth import authenticate, login
+from django.db.models import Sum  # Asegúrate de tener esta línea de importación
 
 # Create your views here.
-
-
-
 def index(request):
     productos = Producto.objects.all()  #En vez de usar Select * from, esto hace la consulta y los datos pasan a una lista
     context = {"productos" : productos} #Enviar en un diccionario de datos
@@ -25,25 +25,41 @@ def loginSesion(request):
     context = {}
     return render(request, 'lobopage/loginSesion.html', context)
 
-def loginRegistro(request):
-    context = {}
-    return render(request, 'registration/loginRegistro.html', context)
-
 def compra(request):
     productos = Producto.objects.all()
     context = {'productos' : productos , 'porIds' : [1,2,3]}
     return render(request, 'lobopage/compra.html', context)
 
+
+def registro(request):
+    context = {
+        'form': CustomUserCreationForm()
+        }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)#tiene que ser data
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            return redirect(to="index")
+        context["form"] = formulario    
+    return render(request, 'registration/registro.html', context)
+
+
+#Administradores
 @login_required
+@staff_member_required
 def crudProductos(request):
     # request.session["usuario"]="admin"
     # usuario=request.session["usuario"]
-    if request.user.username != "admin":
-        return redirect('index')
+
     productos = Producto.objects.all()
     context = {'productos': productos}
     return render(request, 'lobopage/productos_list.html', context)
 
+@login_required
+@staff_member_required
 def productosAdd(request):
     if request.method != "POST":
         #No es un POST, por lo tanto se muestra el formulario para agregar
@@ -79,6 +95,8 @@ def productosAdd(request):
         context={'mensaje' : "Datos grabados correctamente..."}
         return render(request, 'lobopage/productos_add.html', context)
 
+@login_required
+@staff_member_required
 def productosDel(request, pk):
         context = {}
         try:
@@ -95,6 +113,8 @@ def productosDel(request, pk):
             context = {'productos' : productos, 'mensaje':mensaje}
             return render(request, 'lobopage/productos_list.html', context)
 
+@login_required
+@staff_member_required
 def productos_FindEdit(request, pk): #pk es donde recibe el id del producto como parametro
     if pk != "": #Si el pk que recibe NO esta vacio try en caso contrario except
         try:
@@ -106,6 +126,8 @@ def productos_FindEdit(request, pk): #pk es donde recibe el id del producto como
             context = {'mensaje': "Error, el producto no existe"}
             return render(request, 'lobopage/productos_list.html', context) #Envia mensaje pero a la ruta list
 
+@login_required
+@staff_member_required
 def productosUpdate(request):
     if request.method == "POST":
         # Es un POST, por lo tanto se recuperan los datos del formulario
@@ -135,120 +157,39 @@ def productosUpdate(request):
         return render(request, 'lobopage/productos_list.html', context)
 
 
-
-
-def crud(request):
-    alumnos = Alumno.objects.all()
-    context = {'alumnos': alumnos}
-    return render(request, 'lobopage/alumnos_list.html', context)
-
-def alumnosAdd(request):
-    if request.method != "POST":
-        #no es un POST, por lo tanto se muestra el formulario para agregar
-        generos=Genero.objects.all()
-        context = {'generos': generos}
-        return render(request, 'lobopage/alumnos_add.html', context)
-    else:
-        #Es un POST, por lo tanto se recuperan los datos del formulario
-        #y se graban en la tabla.
-
-        rut=request.POST["rut"]
-        nombre=request.POST["nombre"]
-        aPaterno=request.POST["paterno"]
-        aMaterno=request.POST["materno"]
-        fechaNac=request.POST["fechaNac"]
-        genero=request.POST["genero"]
-        telefono=request.POST["telefono"]
-        email=request.POST["email"]
-        direccion=request.POST["direccion"]
-        activo="1"
-
-        objGenero=Genero.objects.get(id_genero = genero)
-        obj=Alumno.objects.create ( rut=rut,
-                                    nombre=nombre,
-                                    apellido_paterno=aPaterno,
-                                    apellido_materno=aMaterno,
-                                    fecha_nacimiento=fechaNac,
-                                    id_genero=objGenero,
-                                    telefono=telefono,
-                                    email=email,
-                                    direccion=direccion,
-                                    activo=1 )
-        obj.save()
-        context={'mensaje' : "Ok , datos grabados..."}
-        return render(request, 'lobopage/alumnos_add.html', context)
     
-
-def alumnosDel(request, pk):
-        context = {}
-        try:
-            alumno=Alumno.objects.get(rut=pk)
-
-            alumno.delete()
-            mensaje="Bien, datos eliminados.."
-            alumnos=Alumno.objects.all()
-            context = {'alumnos':alumnos, 'mensaje':mensaje}
-            return render(request, 'lobopage/alumnos_list.html', context)        
-        except:
-            mensaje="Error, rut no existe..."
-            alumnos = Alumno.objects.all()
-            context = {'alumnos' : alumnos, 'mensaje':mensaje}
-            return render(request, 'lobopage/alumnos_list.html', context)
+@login_required
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    carrito_item, created = CarritoItem.objects.get_or_create(
+        producto=producto,
+        usuario=request.user,
+    )
+    if not created:
+        carrito_item.cantidad += 1
+        carrito_item.save()
+    return redirect('index')
 
 
-def alumnos_findEdit(request, pk):
+@login_required
+def compra(request):
+    carrito_items = CarritoItem.objects.filter(usuario=request.user)
+    total_carrito = sum(item.subtotal() for item in carrito_items)
+    productos = Producto.objects.all()
+    context = {
+        'carrito_items': carrito_items,
+        'total_carrito': total_carrito,
+        'porIds' : [1,2,3],
+        'productos' : productos
+    }
+    return render(request, 'lobopage/compra.html', context)
 
-    if pk != "":
-        alumno=Alumno.objects.get(rut=pk)
-        generos=Genero.objects.all()
-
-        print(type(alumno.id_genero.genero))
-        context = {'alumno' : alumno, 'generos':generos}
-        if alumno:
-            return render(request, 'lobopage/alumnos_edit.html', context)
-        else:
-            context = {'mensaje' : "Error, rut no existe..."}
-            return render(request, 'lobopage/alumnos_list.html', context)
-        
-        
-def alumnosUpdate(request):
-    if request.method == "POST":
-        # Es un POST, por lo tanto se recuperan los datos del formulario
-        # y se graban en la tabla.
-        
-        rut = request.POST["rut"]
-        nombre = request.POST["nombre"]
-        aPaterno = request.POST["paterno"]
-        aMaterno = request.POST["materno"]
-        fechaNac = request.POST["fechaNac"]
-        genero = request.POST["genero"]
-        telefono = request.POST["telefono"]
-        email = request.POST["email"]
-        direccion = request.POST["direccion"]
-        activo = 1  # Asignar como entero
-        
-        objGenero = Genero.objects.get(id_genero=genero)
-        
-        alumno = Alumno()
-        alumno.rut = rut
-        alumno.nombre = nombre
-        alumno.apellido_paterno = aPaterno
-        alumno.apellido_materno = aMaterno
-        alumno.fecha_nacimiento = fechaNac
-        alumno.id_genero = objGenero
-        alumno.telefono = telefono
-        alumno.email = email
-        alumno.direccion = direccion
-        alumno.activo = activo
-        alumno.save()
-        
-        generos = Genero.objects.all()
-        context = {'mensaje': "Ok, datos actualizados...", 'generos': generos, 'alumno': alumno}
-        return render(request, 'lobopage/alumnos_edit.html', context)
-    else:
-        # No es un POST, por lo tanto se muestra el formulario para agregar.
-        alumnos = Alumno.objects.all()
-        context = {'alumnos': alumnos}
-        return render(request, 'lobopage/alumnos_list.html', context)
-
-    
+@login_required
+def actualizar_carrito(request, item_id, accion):
+    carrito_item = get_object_or_404(CarritoItem, id=item_id, usuario=request.user)
+    if accion == 'incrementar':
+        carrito_item.cantidad += 1
+    elif accion == 'decrementar' and carrito_item.cantidad > 1:
+        carrito_item.cantidad -= 1
+    carrito_item.save()
+    return redirect('compra')

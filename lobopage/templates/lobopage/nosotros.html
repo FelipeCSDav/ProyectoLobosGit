@@ -41,10 +41,27 @@
             <a class="nav-link"   href="{% url 'compra' %}">Carrito<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-right" viewBox="0 0 10 4"> <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
             <i class="bi bi-cart3"></i></a>
             {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'logout' %}">Cerra Sesión</a>
+              {% if user.is_staff %}
+                <a class="nav-link" href="{% url 'crudProductos' %}">Productos</a>
+              {% endif %}
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ user.username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% if user.is_staff %}
+                  <li><a class="dropdown-item " href="http://127.0.0.1:8000/admin/">Panel Django</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item " href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+              </div>
             {% else %}
-            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+              <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
             {% endif %}
+              <!--<form action="{% url 'logout' %}" method="post">
+                {% csrf_token %} 
+                <button class="nav-link" type="">Cerra Sesión</button>
+              </form>-->
           </div>
         </div>
       </div>
@@ -54,19 +71,21 @@
 
   <div class="container contenido-nost" style="margin-top: 200px;">
     <div class="row">
-      <div class="col text-end col-lg-5 col-12 mt-3">
-        <img class="rounded-3" src="{% static 'img/sobrenosotros.jpg' %}" alt="" style="width: 100%;">
-      </div>
-      <div class="col col-lg-7 col-12 mt-3">
-        <h1>Bienvenidos</h1>
-        <h1>Viajeros a Lobos de Guerra Chile</h1>
-        <p>Como ya saben, hemos estado durante mucho tiempo activos en las redes sociales. Tanto en instagram como en facebook hemos estado publicando post sobre mitología,simbología,runas y otras cosas de interés sobre la cultura nórdica.</p>
-        <p>Ahora tras mucho tiempo trabajando en ella, les presentamos nuestra Web,la cual hemos hecho con muchisimo cariño. En ella encontrarán la mayoría de publicaciones que que hemos estado haciendo en nuestras redes sociales, ofrecemos una variedad de productos vikingos y nórdicos, y que a poco iremos añadiendo cosas nuevas.</p>
-        <p>Deseamos con mucha ilusión que nuestra Web les agrade, la disfruten y la compartan ¡gracias a todos por estar ahí!</p>    
-        <p>Que los dioses los sonrían y los protejan a todos, ¡Skål!</p>
-      </div>
+        <div class="col-lg-5 col-md-12 mt-3">
+            <img class="rounded-3" src="{% static 'img/sobrenosotros.jpg' %}" alt="Sobre Nosotros" style="width: 85%;">
+        </div>
+        <div class="col-lg-7 col-md-12 mt-3">
+            <h1>Bienvenidos a Lobos de Guerra Chile</h1>
+            <p>Somos apasionados por la mitología, simbología y cultura nórdica. Desde nuestras redes sociales, hemos compartido historias fascinantes y ahora estamos encantados de presentarles nuestro sitio web.</p>
+            <p>En Lobos de Guerra, encontrarán una colección cuidadosamente seleccionada de productos vikingos y nórdicos. Desde joyería artesanal hasta decoraciones temáticas, ofrecemos artículos que celebran la herencia y la espiritualidad de los antiguos pueblos del norte.</p>
+            <p>Nuestro equipo ha trabajado con dedicación para crear esta plataforma. Esperamos que disfruten explorando nuestras publicaciones, productos y más. ¡Acompáñennos en este viaje de descubrimiento y conexión con el pasado!</p>
+            <p>¡Que los dioses los sonrían y los protejan en este viaje! ¡Skål!</p>
+            <a href="{% url 'index' %}" class="btn btn-dark mt-3">Explorar Productos</a>
+
+        </div>
     </div>
-  </div>
+</div>
+
 
   <!--Footer-->
   <div class="container-fluid text-white p-3" style="background-color: black; margin-top: 70px;">

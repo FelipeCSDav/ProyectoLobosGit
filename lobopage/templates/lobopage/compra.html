@@ -1,7 +1,7 @@
 {% load static %}
+{% load humanize %} 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,6 @@
 </head>
 
 <body>
-  <!--Barra de navegacion-->
   <header>
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
@@ -43,10 +42,27 @@
             <a class="nav-link"   href="{% url 'compra' %}">Carrito<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-right" viewBox="0 0 10 4"> <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
             <i class="bi bi-cart3"></i></a>
             {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'logout' %}">Cerra Sesión</a>
+              {% if user.is_staff %}
+                <a class="nav-link" href="{% url 'crudProductos' %}">Productos</a>
+              {% endif %}
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ user.username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% if user.is_staff %}
+                  <li><a class="dropdown-item " href="http://127.0.0.1:8000/admin/">Panel Django</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item " href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+              </div>
             {% else %}
-            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+              <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
             {% endif %}
+              <!--<form action="{% url 'logout' %}" method="post">
+                {% csrf_token %} 
+                <button class="nav-link" type="">Cerra Sesión</button>
+              </form>-->
           </div>
         </div>
       </div>
@@ -59,45 +75,39 @@
       <h3 id="titulo-carrito">Carrito de Compra</h3>
       <hr class="container" style="height: 2px; background-color: black; width: 1100px;">
     </div>
-
+    
     
     <div class="d-flex justify-content-center"> <!--Este div me permite justificar el row al centro para poder disminuir el tamaño de este-->
       <div class="row fila-producto">
-        
-        <div class="col-lg-4 col-sm-7 text-center mt-3">
-            <img src="{% static 'img/a-collar-arbol.png' %}" alt="img1" style="width: 200px;">
-        </div>  
-        <div class="col-lg-4 col-sm-5 mt-3">           
-              <p class="fw-semibold">COLLAR ÁRBOL MUNDO</p>
-              <p>Modelo: Bronce</p>
-            <div class="d-flex">
-              <p>Subtotal:</p>
-              <p id="subtotalValor" style="margin-left: 7px;">8000</p> 
+        {% for item in carrito_items %}
+          <div class="row">
+            <div class="col-lg-2">
+              <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" style="width: 100px;">
             </div>
-            <div class="d-flex align-items-center">
-              <p class="mb-0">Cantidad:</p>
-              <!--sumar y restar-->  
-              <button id="Decremento" class="material-symbols-rounded  ms-3 p-1">remove</button>
-              <p class=" mb-0 ms-3" id="Contar">1</p>
-              <button id="Incremento" class="material-symbols-rounded ms-3 p-1">add</button>
+            <div class="col-lg-4">
+              <h5>{{ item.producto.nombre }}</h5>
+              <p>Precio unitario: ${{ item.producto.precio | intcomma}}</p>
+              <p class="d-flex align-items-center">
+                <span>Cantidad: </span> <!-- Etiqueta span para el texto estático "Cantidad" -->          
+                <!-- Botón de decremento -->
+                <a href="{% url 'actualizar_carrito' item.id 'decrementar' %}" class="text-decoration-none">
+                    <button id="Decremento" class="material-symbols-rounded ms-2 p-1">remove</button>
+                </a>
+                <span class="ms-3 me-2">{{ item.cantidad }}</span> 
+                <!-- Botón de incremento -->
+                <a href="{% url 'actualizar_carrito' item.id 'incrementar' %}" class="text-decoration-none">
+                    <button id="Incremento" class="material-symbols-rounded ms-2 p-1">add</button>
+                </a>
+            </p>
+            
+              <p>Subtotal: ${{ item.subtotal | intcomma}}</p>
             </div>
-        </div> 
-        <div class="col-lg-4 col-md-12 mt-3">
-            <div class="d-flex mx-2">
-              <p class="fw-bold">Total:</p>
-              <p class="ms-auto fw-bold"  id="totalPrecio"></p>
-            </div>
-            <div class="text-center">
-              <input id="input-codpromo-carrito" type="text" placeholder="¿TIENES UN CÓDIGO DE PROMOCION?">
-              <p id="txt-codpromo-carrito"></p>
-            </div>
-            <div class="text-center">
-              <button class="w-100" id="btn-continuar-carrito">APLICAR</button>
-            </div>
-            <div class="text-center">
-              <img class="w-75" src="{% static 'img/metodos-pago.png' %}" alt="Pago">
-            </div>
-        </div> 
+          </div>
+          <hr>
+        {% endfor %}
+        <div class="text-end">
+          <h5>Total: ${{ total_carrito | intcomma}} CLP</h5>
+        </div>
       </div> <!--fin row 1-->
     </div>
 
@@ -141,9 +151,9 @@
           <div class="w-50 p-2">
             <h5>{{p.nombre}}</h5>
             <hr>
-            <p class="fs-5">${{p.precio}}</p>
+            <p class="fs-5">${{p.precio | intcomma}}</p>
             <div class="mt-2">
-              <a href="https://youtu.be/mCdA4bJAGGk?t" target="_blank"><button id="btn-comprar-index">Añadir al carrito</button></a>
+              <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank"><button id="btn-comprar-index">Añadir al carrito</button></a>
             </div>
             <p class="mt-4">{{p.descripcion}}</p>
             <hr>
@@ -155,6 +165,8 @@
     </div>
   </div>
   {% endfor %}
+
+  <!-- compra.html -->
 
 
   <div class="row text-center" style="margin-top: 100px;">
@@ -235,5 +247,6 @@
 
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="{% static 'js/script-compra-page.js' %}"></script>
+  
 </body>
 </html>

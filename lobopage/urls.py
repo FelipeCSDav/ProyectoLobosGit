@@ -7,20 +7,15 @@ urlpatterns = [
     path('mitologia', views.mitologia, name='mitologia'),
     path('nosotros', views.nosotros, name='nosotros'),
     path('loginSesion', views.loginSesion, name='loginSesion'),
-    path('loginRegistro', views.loginRegistro, name='loginRegistro'),
+    path('registro', views.registro, name='registro'),
     path('compra', views.compra, name='compra'),
 
+    path('agregar_al_carrito/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('actualizar_carrito/<int:item_id>/<str:accion>/', views.actualizar_carrito, name='actualizar_carrito'),
     #Productos
     path('crudProductos', views.crudProductos, name='crudProductos'),
     path('productosAdd', views.productosAdd, name='productosAdd'),
     path('productosDel/<str:pk>', views.productosDel, name='productosDel'),
     path('productos_FindEdit/<str:pk>', views.productos_FindEdit, name='productos_FindEdit'),
     path('productosUpdate', views.productosUpdate, name='productosUpdate'),
-
-    path('crud', views.crud, name='crud'),
-    path('alumnosAdd', views.alumnosAdd, name='alumnosAdd'),
-    path('alumnosDel/<str:pk>', views.alumnosDel, name='alumnosDel'), #Acá llega el rut del alumno y reenvía a la función alumnos_del.
-    path('alumnos_findEdit/<str:pk>', views.alumnos_findEdit, name='alumnos_findEdit'),
-    path('alumnosUpdate', views.alumnosUpdate, name='alumnosUpdate'),
-
 ]

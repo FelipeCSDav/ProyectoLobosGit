@@ -37,29 +37,29 @@
                 <p>o usa tu correo para registrarte</p>
                 
                 <!--Formulario-->
-                <form ction="" method="post" class="form" id="form2">
+                <form action="" method="post" class="form" id="form2">
                     {% csrf_token %}
                     <label id="labelUser">
                         <i class='bx bx-user'></i>
-                        <input type="text" id="usuario" placeholder="Nombre Completo">
+                        <input type="text" name="username" id="id_username" placeholder="Nombre de usuario">
                     </label>
                     <p id="warningUser"></p>
-                    <label id="labelRut">
-                        <i class='bx bx-user'></i>
-                        <input type="text" id="rut" placeholder="Rut">
-                    </label>
-                    <p id="warningRut"></p>
-                    <label id="labelGmail">
+                    <label id="labelEmail">
                         <i class='bx bx-envelope' ></i>
-                        <input type="email" id="email" placeholder="Correo Electronico"> 
-                    </label>  
-                    <p id="warningGmail"></p>
-                    <label id="labelPass">
-                        <i class='bx bx-lock-open' ></i>
-                        <input type="password" id="password" placeholder="Contraseña">
+                        <input type="email" name="email" id="id_email" placeholder="Dirección de correo">
                     </label>
-                    <p id="warningPass"></p>
-
+                    <p id="warningEmail"></p>
+                    <label id="labelPass1">
+                        <i class='bx bx-user'></i>
+                        <input type="password" name="password1" id="id_password1" placeholder="Contraseña">
+                    </label>
+                    <p id="warningPass1"></p>
+                    <label id="labelPass2">
+                        <i class='bx bx-envelope' ></i>
+                        <input type="password" name="password2" id="id_password2" placeholder="Confirmar contraseña">
+                    </label>  
+                    <p id="warningPass2"></p>
+                    
                     <input type="submit" id="bRegistrar" value="Registrarse">
                     <p class="warnings" id="warnings"></p>
                 </form>
@@ -67,6 +67,15 @@
         </div>
     </div>
 
+    
     <script src="{% static 'js/script-login-page.js' %}"></script>
+    <!--Tambien para placeholder {{form.username}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('[name="username"]').setAttribute('placeholder', 'Nombre de usuario');
+            document.querySelector('[name="password1"]').setAttribute('placeholder', 'Contraseña');
+            document.querySelector('[name="password2"]').setAttribute('placeholder', 'Confirmar contraseña');
+        });
+    </script>-->
 </body>
 </html>

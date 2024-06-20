@@ -23,7 +23,7 @@
                 </a>
                 <h2>Bienvenido</h2>
                 <p>Afila tu hacha vikingo el Valhalla te espera. Create una cuenta o Inicia Sesión si ya tienes una.</p>
-                <a href="{% url 'loginRegistro' %}"><input type="button" value="Crear Cuenta"></a>
+                <a href="{% url 'registro' %}"><input type="button" value="Crear Cuenta"></a>
             </div>
         </div>
         <div class="form-information">
@@ -34,14 +34,14 @@
                     <a href="https://www.instagram.com/lobosdeguerrachile/" target="_blank"><i class='bx bxl-instagram' ></i></a>
                     <i class='bx bxl-github'></i>
                 </div>
-                <p>o usa tu correo para iniciar sesión</p>
+                <p>o usa tu usuario para iniciar sesión</p>
                 
                 <!--Formulario-->
                 <form action="" method="post" class="form" id="form" >
                     {% csrf_token %}
                     <label id="labelGmail">
                         <i class='bx bx-envelope' ></i>
-                        <input type="text" id="email" placeholder="Correo Electronico" name="username"> 
+                        <input type="text" id="email" placeholder="Nombre de usuario" name="username"> 
                     </label>  
                     <p id="warningGmail"></p>
                     <label id="labelPass">

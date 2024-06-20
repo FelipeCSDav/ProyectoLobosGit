@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     // Variables de los elementos
     const contador = $("#Contar");
     const valorSubTotal = $("#subtotalValor");
@@ -58,7 +58,7 @@ $(document).ready(function(){
     function formatNumber(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
-});
+});*/
 
 
 //API Indicador de UF, dolar, etc

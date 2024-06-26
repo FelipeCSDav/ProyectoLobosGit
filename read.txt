@@ -1,5 +1,0 @@
-python -m venv myvenv		          Proyecto
-./activate			          carpetaScript
-set-executionpolicy remotesigned       
-pip install –r requirements.txt	  	  Proyecto Escribir manualmente
-python -m pip install --upgrade pip       Proyecto

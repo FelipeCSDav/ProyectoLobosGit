@@ -46,8 +46,8 @@ def registro(request):
         context["form"] = formulario    
     return render(request, 'registration/registro.html', context)
 
-
-#Administradores
+############################
+#Usuarios staff y administradores
 @login_required
 @staff_member_required
 def crudProductos(request):
@@ -139,14 +139,16 @@ def productosUpdate(request):
         descripcionNew = request.POST["descripcion"]
         imagenNew = request.FILES.get("imagen")
 
-        producto = Producto()
-        producto.id = id
+        producto = Producto.objects.get(id=id)
         producto.nombre = nombreNew
         producto.precio = precioNew
         producto.descripcion = descripcionNew
-        producto.imagen = imagenNew
 
+        if imagenNew:
+            producto.imagen = imagenNew  # Actualiza la imagen solo si se ha seleccionado una nueva
         producto.save()
+
+        
         
         context = {'mensaje': "Datos actualizados...", 'producto': producto}
         return render(request, 'lobopage/productos_edit.html', context)
@@ -156,8 +158,8 @@ def productosUpdate(request):
         context = {'productos': productos}
         return render(request, 'lobopage/productos_list.html', context)
 
-
-    
+############################
+#Carrito de Compra
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
@@ -165,6 +167,8 @@ def agregar_al_carrito(request, producto_id):
         producto=producto,
         usuario=request.user,
     )
+
+  
     if not created:
         carrito_item.cantidad += 1
         carrito_item.save()
@@ -175,12 +179,28 @@ def agregar_al_carrito(request, producto_id):
 def compra(request):
     carrito_items = CarritoItem.objects.filter(usuario=request.user)
     total_carrito = sum(item.subtotal() for item in carrito_items)
+    descuento = 0
+
+    if request.method == 'POST':
+        codigo_promo = request.POST.get('codigo_promo')
+        if codigo_promo == 'NORDICO$2024$':
+            request.session['codigo_promo'] = codigo_promo
+        else:
+            request.session['codigo_promo'] = None
+
+    codigo_promo = request.session.get('codigo_promo')
+    if codigo_promo == 'NORDICO$2024$':
+        descuento = 0.25  # 25% de descuento
+
+    total_con_descuento = round(total_carrito * (1 - descuento))
     productos = Producto.objects.all()
     context = {
         'carrito_items': carrito_items,
         'total_carrito': total_carrito,
-        'porIds' : [1,2,3],
-        'productos' : productos
+        'total_con_descuento': total_con_descuento,
+        'descuento': descuento,
+        'productos': productos,
+        'porIds' : [1,2,3]
     }
     return render(request, 'lobopage/compra.html', context)
 
@@ -192,4 +212,10 @@ def actualizar_carrito(request, item_id, accion):
     elif accion == 'decrementar' and carrito_item.cantidad > 1:
         carrito_item.cantidad -= 1
     carrito_item.save()
+    return redirect('compra')
+
+@login_required
+def eliminar_del_carrito(request, item_id):
+    carrito_item = get_object_or_404(CarritoItem, id=item_id, usuario=request.user)
+    carrito_item.delete()
     return redirect('compra')

@@ -40,7 +40,7 @@
             <a class="nav-link" href="{% url 'mitologia' %}">Mitología</a>
             <a class="nav-link" href="{% url 'nosotros' %}">Nosotros</a>
             <a class="nav-link"   href="{% url 'compra' %}">Carrito<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-right" viewBox="0 0 10 4"> <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/></svg>
-            <i class="bi bi-cart3"></i></a>
+              <i class="bi bi-cart3"> {% if total_cantidad_productos > 0 %} {{ total_cantidad_productos }} {% endif%}</i></a>
             {% if user.is_authenticated %}
               {% if user.is_staff %}
                 <a class="nav-link" href="{% url 'crudProductos' %}">Productos</a>
@@ -72,22 +72,27 @@
   <!--Contenido-->
   <div class="container" style="margin-top: 150px;">
     <div class="d-flex flex-column align-items-center">
-      <h3 id="titulo-carrito">Carrito de Compra</h3>
+      <h3 id="titulo-carrito">Carrito de Compra {% if not carrito_items%}Vacio{% endif%}</h3>
       <hr class="container" style="height: 2px; background-color: black; width: 1100px;">
     </div>
-    
-    
+
+    <div class="text-center">
+      {% if not carrito_items %}
+          <img src="{% static 'img/abuelo-carro.jpg' %}" class="w-50" alt="imagen 1">
+      {% endif %}
+    </div>
+  
     <div class="d-flex justify-content-center"> <!--Este div me permite justificar el row al centro para poder disminuir el tamaño de este-->
       <div class="row fila-producto">
         {% for item in carrito_items %}
           <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-2 mt-1">
               <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" style="width: 100px;">
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-1">
               <h5>{{ item.producto.nombre }}</h5>
-              <p>Precio unitario: ${{ item.producto.precio | intcomma}}</p>
-              <p class="d-flex align-items-center">
+              <p class="mb-2">Precio unitario: ${{ item.producto.precio | intcomma}}</p>
+              <p class="d-flex align-items-center mb-2">
                 <span>Cantidad: </span> <!-- Etiqueta span para el texto estático "Cantidad" -->          
                 <!-- Botón de decremento -->
                 <a href="{% url 'actualizar_carrito' item.id 'decrementar' %}" class="text-decoration-none">
@@ -98,19 +103,51 @@
                 <a href="{% url 'actualizar_carrito' item.id 'incrementar' %}" class="text-decoration-none">
                     <button id="Incremento" class="material-symbols-rounded ms-2 p-1">add</button>
                 </a>
-            </p>
-            
+              </p>
+              <!-- Botón de eliminación -->
+              <a class="text-decoration-none" href="{% url 'eliminar_del_carrito' item.id %}" >
+                <p class="text-danger">Eliminar</p>
+              </a>
               <p>Subtotal: ${{ item.subtotal | intcomma}}</p>
             </div>
           </div>
           <hr>
         {% endfor %}
-        <div class="text-end">
-          <h5>Total: ${{ total_carrito | intcomma}} CLP</h5>
+        <div class="d-flex">
+          {% if carrito_items%}
+          <div class="" style="width: 50%;">
+            <form method="post">
+              {% csrf_token %}
+                <div class="text-center">
+                  <input id="input-codpromo-carrito" type="text" name="codigo_promo" placeholder="¿TIENES UN CÓDIGO DE PROMOCION?">
+                  {% if descuento %}
+                    <p id="txt-codpromo-carrito" class="text-success">Código Válido</p>
+                  {% elif request.method == 'POST' %}
+                    <p id="txt-codpromo-carrito" class="text-danger">Este código no existe o ya no es válido</p>
+                  {% endif %}
+                </div>
+                <div class="text-center">
+                  <button class="w-100" id="btn-continuar-carrito" type="submit">APLICAR</button>
+                </div>
+                <div class="text-center">
+                  <img class="w-75" src="{% static 'img/metodos-pago.png' %}" alt="Pago">
+                </div>   
+            </form>
+          </div>
+          {% endif %}
+
+          {% if carrito_items %}
+          <div class="text-end " style="width: 100%;">
+            <h5>Total: ${{ total_carrito | intcomma}} CLP</h5>
+            {% if descuento %}
+              <h5>Total con descuento: ${{ total_con_descuento | intcomma}} CLP</h5>
+            {% endif %}
+          </div>
+          {% endif %}     
         </div>
       </div> <!--fin row 1-->
     </div>
-
+    
      <!--Articulos destacados-->
     <div>
       <h1 id="titulo-destacados">ARTICULOS DESTACADOS VIKINGOS</h1>
@@ -132,6 +169,7 @@
     {% endfor %}
     </div> <!--fin row 2-->
   </div> <!--fin container-->
+  
   
   
   <!-- Modals -->

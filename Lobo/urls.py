@@ -20,7 +20,7 @@ from django.conf.urls.static import static #
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('lobopage/',include('lobopage.urls')),
+    path('lobopage/',include('lobopage.urls')), #Le saque lobopage/ para arrancar por defecto en index
     path('accounts/', include('django.contrib.auth.urls')), #Esto es para los inicio de sesion
 ]
 
